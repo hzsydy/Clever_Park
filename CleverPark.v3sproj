@@ -22,19 +22,14 @@
   <ItemGroup>
     <Folder Include="vhdl_lib" />
     <Folder Include="vhdl_lib\HCSR04" />
-    <Folder Include="vhdl_lib\infrared" />
     <Folder Include="vhdl_lib\L298N" />
     <Folder Include="vhdl_lib\rotate encoder" />
     <Folder Include="vhdl_lib\synth" />
-    <Folder Include="vhdl_lib\thermal" />
     <Folder Include="vhdl_lib\timer" />
     <Folder Include="vhdl_lib\UART" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="vhdl_lib\HCSR04\HCSR04.vhd">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="vhdl_lib\infrared\infrared.vhd">
       <SubType>Content</SubType>
     </Content>
     <Content Include="vhdl_lib\L298N\L298N.vhd">
@@ -44,9 +39,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="vhdl_lib\synth\synth.vhd">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="vhdl_lib\thermal\thermal.vhd">
       <SubType>Content</SubType>
     </Content>
     <Content Include="vhdl_lib\timer\divider.vhd">

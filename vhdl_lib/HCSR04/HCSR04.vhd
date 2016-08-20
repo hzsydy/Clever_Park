@@ -5,7 +5,14 @@ library IEEE;
 entity HCSR04 is
     port (
         clk: in  std_logic;
-        rst: in  std_logic
+        rst: in  std_logic;
+        --I/O port
+        trig: out std_logic;
+        echo: in  std_logic;
+        --logic port
+        trig_en: in std_logic;
+        ready: out std_logic;
+        result: out std_logic
     );
 end entity;
 

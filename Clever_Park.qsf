@@ -50,14 +50,12 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
 set_global_assignment -name VHDL_FILE vhdl_lib/L298N/L298N.vhd
-set_global_assignment -name VHDL_FILE vhdl_lib/infrared/infrared.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/HCSR04/HCSR04.vhd
 set_global_assignment -name BDF_FILE Clever_Park.bdf
 set_global_assignment -name VHDL_FILE vhdl_lib/UART/UART.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/timer/pwm2int.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/timer/int2pwm.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/timer/divider.vhd
-set_global_assignment -name VHDL_FILE vhdl_lib/thermal/thermal.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/synth/synth.vhd
 set_global_assignment -name VHDL_FILE "vhdl_lib/rotate encoder/roc_enc.vhd"
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"

@@ -6,6 +6,8 @@ entity roc_enc is
     port (
         clk: in  std_logic;
         rst: in  std_logic
+        --I/O port
+        --logic port
     );
 end entity;
 
