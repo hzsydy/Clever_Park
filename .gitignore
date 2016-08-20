@@ -4,6 +4,11 @@ db/
 output/
 simulation/
 
+#stm
+obj/
+*.o
+*.a
+
 #du的私货
 fuck
 fuck*
