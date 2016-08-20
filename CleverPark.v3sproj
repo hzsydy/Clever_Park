@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Syntax Check</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace>Work</RootNamespace>
+    <AssemblyName>CleverPark</AssemblyName>
+    <ProjectGuid>{57791927-2CD2-4346-8A27-A2725836BD19}</ProjectGuid>
+    <V3S-Project-Type>V3S Project</V3S-Project-Type>
+    <Name>CleverPark</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Syntax Check' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Full Compilation' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TopLevelEntity>
+    </TopLevelEntity>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="vhdl_lib" />
+    <Folder Include="vhdl_lib\HCSR04" />
+    <Folder Include="vhdl_lib\infrared" />
+    <Folder Include="vhdl_lib\L298N" />
+    <Folder Include="vhdl_lib\rotate encoder" />
+    <Folder Include="vhdl_lib\synth" />
+    <Folder Include="vhdl_lib\thermal" />
+    <Folder Include="vhdl_lib\timer" />
+    <Folder Include="vhdl_lib\UART" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="vhdl_lib\HCSR04\HCSR04.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\infrared\infrared.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\L298N\L298N.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\rotate encoder\roc_enc.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\synth\synth.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\thermal\thermal.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\timer\divider.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\timer\int2pwm.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\timer\pwm2int.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\UART\UART.vhd">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <!-- insertExternalFiles !-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
