@@ -12,11 +12,11 @@ entity HCSR04 is
         --logic port
         trig_en: in std_logic;
         ready: out std_logic;
-        result: out std_logic
+        dist: out std_logic
     );
 end entity;
 
 architecture rtl of HCSR04 is
 begin
-    
+
 end architecture;

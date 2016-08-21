@@ -4,6 +4,10 @@ db/
 output/
 simulation/
 
+#sb altium designer
+History/
+__Previews/
+
 #stm
 obj/
 *.o
