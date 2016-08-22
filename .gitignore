@@ -1,6 +1,6 @@
 #暂时忽略掉顶模块
-Clever_park.qsf
-Clever_park.bdf
+Clever_park.*
+CleverPark.*
 
 #sb quartus
 db/
@@ -19,6 +19,12 @@ __Previews/
 obj/
 *.o
 *.a
+JLink*.*
+template*
+stm32*
+startup_stm*
+misc.*
+system_stm32*   
 
 #du的私货
 fuck

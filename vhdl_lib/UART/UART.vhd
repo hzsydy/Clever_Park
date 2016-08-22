@@ -1,7 +1,7 @@
 library IEEE;
     use IEEE.std_logic_1164.all;
     use IEEE.numeric_std.all;
-	     use IEEE.std_logic_unsigned.all;
+    use IEEE.std_logic_unsigned.all;
     use IEEE.std_logic_arith.all;
 
 entity UART is
@@ -214,6 +214,9 @@ begin
                             else
                                 rx_fsm          <=    idle;
                             end if;
+                            rx_par_bit          <=    '0';
+                            rx_data_cnt         <=    DATA_BITS-1;
+                            rx_data             <=    rx_data_tmp;
                     end case;
                 end if;
             end if;
