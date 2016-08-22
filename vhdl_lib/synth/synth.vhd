@@ -6,9 +6,9 @@ entity synth is
     port (
         clk: in  std_logic;
         rst: in  std_logic;
-        --I/O port
-        freq: in  std_logic;
         --logic port
+        freq: in  std_logic;
+        --I/O port
         pwm_out: out std_logic
     );
 end entity;

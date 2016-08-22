@@ -53,8 +53,6 @@ set_global_assignment -name VHDL_FILE vhdl_lib/L298N/L298N.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/HCSR04/HCSR04.vhd
 set_global_assignment -name BDF_FILE Clever_Park.bdf
 set_global_assignment -name VHDL_FILE vhdl_lib/UART/UART.vhd
-set_global_assignment -name VHDL_FILE vhdl_lib/timer/pwm2int.vhd
-set_global_assignment -name VHDL_FILE vhdl_lib/timer/int2pwm.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/timer/divider.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/synth/synth.vhd
 set_global_assignment -name VHDL_FILE "vhdl_lib/rotate encoder/roc_enc.vhd"

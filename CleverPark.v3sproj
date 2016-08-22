@@ -44,12 +44,6 @@
     <Content Include="vhdl_lib\timer\divider.vhd">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="vhdl_lib\timer\int2pwm.vhd">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="vhdl_lib\timer\pwm2int.vhd">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="vhdl_lib\UART\UART.vhd">
       <SubType>Content</SubType>
     </Content>
