@@ -2,6 +2,10 @@
 Clever_park.qsf
 Clever_park.bdf
 
+#暂时忽略掉顶模块
+Clever_park.qsf
+Clever_park.bdf
+
 #sb quartus
 db/
 output/
