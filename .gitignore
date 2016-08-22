@@ -1,8 +1,15 @@
+#暂时忽略掉顶模块
+Clever_park.qsf
+Clever_park.bdf
 
 #sb quartus
 db/
 output/
+output_files/
 simulation/
+*.bak
+*.rpt
+incremental_db/
 
 #sb altium designer
 History/
