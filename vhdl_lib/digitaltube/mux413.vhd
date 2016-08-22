@@ -2,7 +2,7 @@ library IEEE;
     use IEEE.std_logic_1164.all;
     use IEEE.numeric_std.all;
 
-entity mux41 is
+entity mux413 is
     port (
         in3 : in std_logic_vector(3 downto 0);
         in2 : in std_logic_vector(3 downto 0);
@@ -18,7 +18,7 @@ entity mux41 is
     );
 end entity;
 
-architecture rtl of mux41 is
+architecture rtl of mux413 is
 begin
     
     main: process(cs, in0, in1, in2, in3)
