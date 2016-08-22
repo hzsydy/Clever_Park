@@ -1,6 +1,7 @@
 
 #暂时忽略掉顶模块
 Clever_park.*
+CleverPark.*
 
 #sb quartus
 db/
