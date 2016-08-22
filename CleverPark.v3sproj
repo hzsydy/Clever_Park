@@ -20,6 +20,7 @@
     </TopLevelEntity>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="utilities" />
     <Folder Include="vhdl_lib" />
     <Folder Include="vhdl_lib\HCSR04" />
     <Folder Include="vhdl_lib\L298N" />
@@ -45,6 +46,12 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="vhdl_lib\UART\UART.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\UART\UART_testbench.vhd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="vhdl_lib\UART\UART_test_module.vhd">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>

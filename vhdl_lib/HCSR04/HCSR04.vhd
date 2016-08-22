@@ -18,12 +18,4 @@ end entity;
 
 architecture rtl of HCSR04 is
 begin
-    main : process(clk)
-    begin
-        if (clk = '1' and clk'Event)then
-            if (rst ='1') then
-            else
-            end if;
-        end if;
-    end process
 end architecture;

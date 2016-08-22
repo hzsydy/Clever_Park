@@ -49,6 +49,60 @@ set_global_assignment -name DEVICE_FILTER_PIN_COUNT 208
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_location_assignment PIN_131 -to CLK
+set_location_assignment PIN_12 -to BUTTON[7]
+set_location_assignment PIN_11 -to BUTTON[6]
+set_location_assignment PIN_10 -to BUTTON[5]
+set_location_assignment PIN_8 -to BUTTON[4]
+set_location_assignment PIN_6 -to BUTTON[3]
+set_location_assignment PIN_5 -to BUTTON[2]
+set_location_assignment PIN_4 -to BUTTON[1]
+set_location_assignment PIN_3 -to BUTTON[0]
+set_location_assignment PIN_44 -to BIT_A
+set_location_assignment PIN_40 -to BIT_B
+set_location_assignment PIN_45 -to BIT_C
+set_location_assignment PIN_47 -to BIT_D
+set_location_assignment PIN_46 -to BIT_DP
+set_location_assignment PIN_48 -to BIT_E
+set_location_assignment PIN_41 -to BIT_F
+set_location_assignment PIN_43 -to BIT_G
+set_location_assignment PIN_39 -to DIG[3]
+set_location_assignment PIN_37 -to DIG[2]
+set_location_assignment PIN_36 -to DIG[1]
+set_location_assignment PIN_35 -to DIG[0]
+set_location_assignment PIN_56 -to LED[7]
+set_location_assignment PIN_57 -to LED[6]
+set_location_assignment PIN_58 -to LED[5]
+set_location_assignment PIN_59 -to LED[4]
+set_location_assignment PIN_60 -to LED[3]
+set_location_assignment PIN_61 -to LED[2]
+set_location_assignment PIN_63 -to LED[1]
+set_location_assignment PIN_64 -to LED[0]
+set_location_assignment PIN_13 -to C[3]
+set_location_assignment PIN_14 -to C[2]
+set_location_assignment PIN_15 -to C[1]
+set_location_assignment PIN_30 -to C[0]
+set_location_assignment PIN_31 -to R[3]
+set_location_assignment PIN_32 -to R[2]
+set_location_assignment PIN_33 -to R[1]
+set_location_assignment PIN_34 -to R[0]
+set_location_assignment PIN_152 -to SYNTH
+set_location_assignment PIN_116 -to IDKEY[3]
+set_location_assignment PIN_115 -to IDKEY[2]
+set_location_assignment PIN_114 -to IDKEY[1]
+set_location_assignment PIN_113 -to IDKEY[0]
+set_location_assignment PIN_133 -to UART0_TX
+set_location_assignment PIN_134 -to UART0_RX
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH UART_testbench -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_NAME UART_testbench -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME testbench -section_id UART_testbench
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME UART_testbench -section_id UART_testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE vhdl_lib/UART/UART_testbench.vhd -section_id UART_testbench
+set_global_assignment -name VHDL_FILE utilities/byte2led.vhd
+set_global_assignment -name VHDL_FILE vhdl_lib/UART/UART_test_module.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/L298N/L298N.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/HCSR04/HCSR04.vhd
 set_global_assignment -name BDF_FILE Clever_Park.bdf
@@ -56,9 +110,8 @@ set_global_assignment -name VHDL_FILE vhdl_lib/UART/UART.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/timer/divider.vhd
 set_global_assignment -name VHDL_FILE vhdl_lib/synth/synth.vhd
 set_global_assignment -name VHDL_FILE "vhdl_lib/rotate encoder/roc_enc.vhd"
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name TCL_SCRIPT_FILE Project_pin.tcl
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
