@@ -19,20 +19,18 @@ end entity;
 architecture rtl of divider is
     signal p_time_count : integer;
 begin
-    main : process(clk)
+    main : process(clk,rst)
     begin
-        if (clk = '1' and clk'Event)then
-            if (rst ='1') then
+        if (rst='1') then
+            p_time_count <= 0;
+            clk_out <= '0';
+        elsif (clk = '1' and clk'Event)then
+            if (p_time_count = len-1) then
                 p_time_count <= 0;
-                clk_out <= '0';
+                clk_out <= '1';
             else
-                if (p_time_count = len-1) then
-                    p_time_count <= 0;
-                    clk_out <= '1';
-                else
-                    p_time_count <= p_time_count + 1;
-                    clk_out <= '0';
-                end if;
+                p_time_count <= p_time_count + 1;
+                clk_out <= '0';
             end if;
         end if;
     end process main;
