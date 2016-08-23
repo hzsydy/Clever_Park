@@ -23,6 +23,10 @@ int fputc(int ch, FILE *f)
 #endif 
 
 u16 USART_RX_BUF[USART_REC_LEN-1];     //接收缓冲，最大63个字节，末字节为换行符
+//USART_RX_STA
+//bit15接收完成标志
+//bit14接收到0X0D标志
+//bit13~0接收到的有效数据个数
 u8 USART_RX_STA = 0;
 
 u16 receivedAByte = 0;
@@ -32,26 +36,26 @@ void usart_init(u32 baud)
   GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-	
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE );
-  TIM_DeInit(TIM1);
-  TIM_TimeBaseStructure.TIM_Prescaler = 287;                                                                        
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; 
-  TIM_TimeBaseStructure.TIM_Period = 1000*25;	             
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0;			  
-  TIM_TimeBaseStructure.TIM_RepetitionCounter = 0x0;		  
-  TIM_TimeBaseInit(TIM1,&TIM_TimeBaseStructure);	        
-  TIM_ClearFlag(TIM1, TIM_FLAG_Update);      
-  TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE); 
-  TIM_Cmd(TIM1, ENABLE); 
-	
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-  NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQn;  
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;  
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;         
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;            
-  NVIC_Init(&NVIC_InitStructure);  
+	//TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	//
+  //RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE );
+  //TIM_DeInit(TIM1);
+  //TIM_TimeBaseStructure.TIM_Prescaler = 287;                                                                        
+  //TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; 
+  //TIM_TimeBaseStructure.TIM_Period = 1000*25;	             
+  //TIM_TimeBaseStructure.TIM_ClockDivision = 0;			  
+  //TIM_TimeBaseStructure.TIM_RepetitionCounter = 0x0;		  
+  //TIM_TimeBaseInit(TIM1,&TIM_TimeBaseStructure);	        
+  //TIM_ClearFlag(TIM1, TIM_FLAG_Update);      
+  //TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE); 
+  //TIM_Cmd(TIM1, ENABLE); 
+	//
+	//NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+  //NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQn;  
+  //NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;  
+  //NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;         
+  //NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;            
+  //NVIC_Init(&NVIC_InitStructure);  
 	 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA|RCC_APB2Periph_AFIO, ENABLE);
   //USART1_TX   PA.9
@@ -87,47 +91,52 @@ void usart_init(u32 baud)
 	USART_Cmd(USART1, ENABLE);                    
 }
 
-void TIM1_UP_IRQHandler(void)
-{
-	u16 i;
-	if(receivedAByte == 0)
+//void TIM1_UP_IRQHandler(void)
+//{
+//	u16 i;
+//	if(USART_RX_STA > 0 && !(USART_RX_STA & 0x80))
+//	{
+//		USART_RX_STA |= 0x80;
+//	}
+//	if(USART_RX_STA & 0x80)
+//	{
+//		printf("\r\n(PC)");
+//		for(i=0; i<USART_RX_STA; i++)
+//		{
+//			//USART_SendData(USART1, USART_RX_BUF[i]);
+//			//while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET){;}	//USART_FLAG_TC是发送完成位
+//			printf("%c", USART_RX_BUF[i]);
+//		}
+//		USART_RX_STA = 0;
+//	}
+//  TIM_ClearITPendingBit(TIM1, TIM_IT_Update); 
+//}
+
+void USART1_IRQHandler(void)                	//串口1中断服务程序
 	{
-		if(USART_RX_STA > 0 && !(USART_RX_STA & 0x80))
+	u8 Res;
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
 		{
-			USART_RX_STA |= 0x80;
-		}
-		if(USART_RX_STA & 0x80)
-		{
-			printf("你刚才发送的是:\r\n");
-			for(i=0; i<USART_RX_STA; i++)
+		Res =USART_ReceiveData(USART1);//(USART1->DR);	//读取接收到的数据
+		
+		if((USART_RX_STA&0x80)==0)//接收未完成
 			{
-				//USART_SendData(USART1, USART_RX_BUF[i]);
-				//while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET){;}	//USART_FLAG_TC是发送完成位
-				printf("%c", USART_RX_BUF[i]);
-			}
-			USART_RX_STA = 0;
-		}
-	}
-	receivedAByte = 0;
-  TIM_ClearITPendingBit(TIM1, TIM_IT_Update); 
-}
-
-void USART1_IRQHandler(void)                												//串口1中断服务程序
-{
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-	{
-		USART_ClearFlag(USART1, USART_IT_RXNE);
-		USART_ClearITPendingBit(USART1, USART_IT_RXNE);
-		USART_RX_BUF[USART_RX_STA] = USART_ReceiveData(USART1);
-		USART_RX_STA++;
-		if(USART_RX_STA == 0x7f)
-		{
-			USART_RX_STA |= 0x80;
-			return;
-		}
-		receivedAByte=1;
-	}
+			if(USART_RX_STA&0x40)//接收到了0x0d
+				{
+				if(Res!=0x0a)USART_RX_STA=0;//接收错误,重新开始
+				else USART_RX_STA|=0x80;	//接收完成了 
+				}
+			else //还没收到0X0D
+				{	
+				if(Res==0x0d)USART_RX_STA|=0x40;
+				else
+					{
+					USART_RX_BUF[USART_RX_STA&0X3F]=Res ;
+					USART_RX_STA++;
+					if(USART_RX_STA>63)USART_RX_STA=0;//接收数据错误,重新开始接收	  
+					}		 
+				}
+			}   		 
+     } 
 } 
-
-
 

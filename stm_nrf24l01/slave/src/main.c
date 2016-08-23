@@ -7,7 +7,7 @@
 int main(void)
 {
 	u8 tmp_buf[33];
-	u8 mode = 1;
+	u8 mode = 0;
 	u8 waitingforNRF24L01 = 0;
 	delay_init();
 	NVIC_Configuration();
