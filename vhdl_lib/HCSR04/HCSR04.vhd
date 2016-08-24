@@ -11,14 +11,11 @@ entity HCSR04 is
         --I/O port
         trig: out std_logic;
         echo: in  std_logic;
+        dist: out std_logic_vector(10 downto 0);
         --logic port
         trig_en: in std_logic;
-        ready: out std_logic;
-		  
-        dist0: out std_logic_vector(3 downto 0);
-        dist1: out std_logic_vector(3 downto 0);
-        dist2: out std_logic_vector(3 downto 0);
-        dist3: out std_logic_vector(3 downto 0)
+        ready: out std_logic
+		
     );
 end entity;
 
@@ -33,11 +30,8 @@ begin
         if (rst = '1') then
             trig <= '0';
             ready <= '0';
-            dist0 <= "0000";
-            dist1 <= "0000";
-            dist2 <= "0000";
-            dist3 <= "0000";
-				ready <='0';
+            dist <= "00000000000";
+			ready <='0';
             lengthofimpulse := 0;
         elsif (clk = '1' and clk'event)then
             if (trig_en = '1' and in_impulse = '0') then
@@ -60,10 +54,7 @@ begin
                 calc_time:=calc_time + 1;
             end if;
             if (echo = '0' and in_calc = '1') then
-                dist0<=conv_std_logic_vector((calc_time/2900) rem 10, 4);
-                dist1<=conv_std_logic_vector((calc_time/29000) rem 10, 4);
-                dist2<=conv_std_logic_vector((calc_time/290000) rem 10, 4);
-                dist3<=conv_std_logic_vector((calc_time/2900000) rem 10, 4);
+                dist <= conv_std_logic_vector(calc_time/2900, 11);
 					 ready <='1';
                 calc_time := 0;
                 in_calc <= '0';
