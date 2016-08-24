@@ -16,8 +16,6 @@ entity parallel2serial is
         req: in  std_logic;
         ready: out std_logic;
         
-        led: out std_logic_vector(7 downto 0);
-        
         uart_tx_req : out std_logic;
         uart_tx_end : in  std_logic
     );
@@ -77,12 +75,10 @@ begin
                     else
                         state             <=    waiting;
                     end if;
-                    led <= "10000000";
                 when par1 =>
                     state         <=    par2;
                     ser_out       <=    lock_par_in1;
                     uart_tx_req   <=    '1';
-                    led <= "01000000";
                 when par2 =>
                     if lock_txend = '1' then
                         state         <=    par3;
@@ -94,9 +90,6 @@ begin
                         uart_tx_req   <=    '0';
                         lock_txend_en <=    '1';
                     end if;
-                    led(7 downto 4) <= "0010";
-                    led(1) <= lock_txend_en;
-                    led(0) <= lock_txend;
                 when par3 =>
                     if lock_txend = '1' then
                         state         <=    par4;
@@ -108,9 +101,6 @@ begin
                         uart_tx_req   <=    '0';
                         lock_txend_en <=    '1';
                     end if;
-                    led(7 downto 4) <= "0001";
-                    led(1) <= lock_txend_en;
-                    led(0) <= lock_txend;
                 when par4 =>
                     if lock_txend = '1' then
                         state         <=    stop1;
@@ -154,7 +144,6 @@ begin
                         state         <=    done;
                         lock_txend_en <=    '1';
                     end if;
-                    led <= "00000001";
                 when others =>
                     null;
                 end case;

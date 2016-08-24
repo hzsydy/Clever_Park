@@ -96,16 +96,9 @@ applicable agreement for further details.
 	(port
 		(pt 200 64)
 		(output)
-		(text "led[7..0]" (rect 0 0 30 12)(font "Arial" ))
-		(text "led[7..0]" (rect 149 59 179 71)(font "Arial" ))
-		(line (pt 200 64)(pt 184 64)(line_width 3))
-	)
-	(port
-		(pt 200 80)
-		(output)
 		(text "uart_tx_req" (rect 0 0 47 12)(font "Arial" ))
-		(text "uart_tx_req" (rect 132 75 179 87)(font "Arial" ))
-		(line (pt 200 80)(pt 184 80)(line_width 1))
+		(text "uart_tx_req" (rect 132 59 179 71)(font "Arial" ))
+		(line (pt 200 64)(pt 184 64)(line_width 1))
 	)
 	(drawing
 		(rectangle (rect 16 16 184 160)(line_width 1))
