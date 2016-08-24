@@ -10,10 +10,10 @@ entity mainlogic is
         rst                 :   in  std_logic;
 
         --I/O port
-        dffo                :   in std_logic_vector(15 downto 0);    --distance from front obstacles, cm
-        dfbo                :   in std_logic_vector(15 downto 0);    --distance from back obstacles, cm
-        speedl              :   in std_logic_vector(7 downto 0);     --speed of left wheel, r/min
-        speedr              :   in std_logic_vector(7 downto 0);     --speed of right wheel, r/min
+        dffo                :   in std_logic_vector(9 downto 0);    --distance from front obstacles, cm
+        dfbo                :   in std_logic_vector(9 downto 0);    --distance from back obstacles, cm
+        speedl              :   in std_logic_vector(3 downto 0);     --speed of left wheel, r/min
+        speedr              :   in std_logic_vector(3 downto 0);     --speed of right wheel, r/min
         numofgarage         :   in std_logic_vector(3 downto 0);    --num of garage
 
         --logic port
