@@ -4,10 +4,7 @@
 #include "delay.h"
 #include "NRF24L01.h"
 
-void newline()
-{
-	printf("%c%c", (char)0x0d, (char)0x0a);	
-}
+
 
 int main(void)
 {
@@ -35,17 +32,6 @@ int main(void)
 	printf("find NRF24L01 successfully");
 	newline();
 	waitingforNRF24L01 = 0;
-
-	tmp_buf[0] = 'n';
-	tmp_buf[1] = 'i';
-	tmp_buf[2] = 'a';
-	tmp_buf[3] = 'x';
-	tmp_buf[4] = 'i';
-	tmp_buf[5] = 'p';
-	tmp_buf[6] = 'i';
-	tmp_buf[7] = 'e';
-	tmp_buf[8] = 0x0d;
-	tmp_buf[9] = 0x0a;
 	
 	// master: at tx only if get pc input
 	
@@ -74,18 +60,19 @@ int main(void)
 				if(USART_RX_STA & 0x80)
 				{
 					printf("(PC)");
-					for(i=0; i<USART_RX_STA; i++)
+					for(i=0; i<(USART_RX_STA & 0x3F); i++)
 					{
 						printf("%c", USART_RX_BUF[i]);
 					}
 					newline();
-					for(i=0; i<29; i++)
+					for(i=0; i<(USART_RX_STA & 0x3F); i++)
 					{
 						tmp_buf[i] = USART_RX_BUF[i];
-					}
-					tmp_buf[29] = 0x0d;
-					tmp_buf[30] = 0x0a;				
-					tmp_buf[31] = 0x00;
+					}	
+					for(i=(USART_RX_STA & 0x3F); i<32; i++)
+					{
+						tmp_buf[i] = 0x00;
+					}	
 					USART_RX_STA = 0;
 					mode = 0;
 					mode_inited = 0;

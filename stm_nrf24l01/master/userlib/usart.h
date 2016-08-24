@@ -12,6 +12,7 @@ extern u8 USART_RX_STA;         //接收状态标记
 void usart_init(u32 baud);
 void USART1_IRQHandler(void);
 void TIM1_UP_IRQHandler(void);
+void newline(void);
 
 #endif
 
