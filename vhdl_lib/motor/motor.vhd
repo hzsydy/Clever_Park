@@ -54,6 +54,8 @@ begin
             out4 <= '0';
             calcleft := 0;
             calcright := 0;
+            percentleft := 0;
+            percentright := 0;
         elsif (clk2 = '1' and clk2'event) then
             if (direction_left <= '0') then
                 out1 <= '1';

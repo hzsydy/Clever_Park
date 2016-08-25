@@ -552,6 +552,23 @@ applicable agreement for further details.
 	)
 )
 (symbol
+	(rect 56 416 88 448)
+	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
+	(text "inst2" (rect 3 21 26 33)(font "Arial" )(invisible))
+	(port
+		(pt 16 0)
+		(output)
+		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
+		(line (pt 16 8)(pt 16 0))
+	)
+	(drawing
+		(line (pt 8 8)(pt 16 16))
+		(line (pt 16 16)(pt 24 8))
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
 	(rect 88 360 232 440)
 	(text "divider" (rect 5 0 38 12)(font "Arial" ))
 	(text "inst1" (rect 8 64 31 76)(font "Arial" ))
@@ -578,30 +595,13 @@ applicable agreement for further details.
 	)
 	(parameter
 		"len"
-		"8000"
+		"200000"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 128 64))
 	)
-	(annotation_block (parameter)(rect 232 328 414 356))
-)
-(symbol
-	(rect 56 416 88 448)
-	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
-	(text "inst2" (rect 3 21 26 33)(font "Arial" )(invisible))
-	(port
-		(pt 16 0)
-		(output)
-		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
-		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
-		(line (pt 16 8)(pt 16 0))
-	)
-	(drawing
-		(line (pt 8 8)(pt 16 16))
-		(line (pt 16 16)(pt 24 8))
-		(line (pt 8 8)(pt 24 8))
-	)
+	(annotation_block (parameter)(rect 232 272 419 300))
 )
 (connector
 	(pt 632 216)
