@@ -41,6 +41,7 @@ int main(void)
 	{
 		if(mode)//RXģʽ
 		{
+			waitingforNRF24L01 = 0;
 			if(!mode_inited)
 			{
 				RX_Mode();
@@ -92,6 +93,7 @@ int main(void)
 				printf("Send succeed");newline();
 				mode = 1;
 				mode_inited = 0;
+				waitingforNRF24L01 = 0;
 			}
 			else
 			{										   	
