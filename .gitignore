@@ -30,6 +30,12 @@ system_stm32*
 #unity 
 #Master_unity/
 
+#C#
+bin/
+obj/
+Debug/
+Release/
+
 #du的私货
 fuck
 fuck*
