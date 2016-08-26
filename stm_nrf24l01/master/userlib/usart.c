@@ -146,6 +146,6 @@ void USART1_IRQHandler(void)                	//串口1中断服务程序
 
 void newline(void)
 {
-	printf("%c%c", (char)0x0d, (char)0x0a);	
+	printf("%c%c%c", (char)0x0d, (char)0x0a, (char)0);	
 }
 
