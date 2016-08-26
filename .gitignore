@@ -11,6 +11,12 @@ simulation/
 *.rpt
 incremental_db/
 
+#simulation
+work/
+vsim.wlf
+*.do
+tb_*.vhd
+
 #sb altium designer
 History/
 __Previews/

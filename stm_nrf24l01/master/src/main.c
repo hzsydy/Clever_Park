@@ -4,7 +4,19 @@
 #include "delay.h"
 #include "NRF24L01.h"
 
-
+void printCharIn2(char a)
+{
+	int i;
+	char buffer[9];
+	buffer[8] = 0;
+	
+	for(i=7 ; i>=0 ; i--)
+		if(a & (0x01 << i))
+			buffer[7-i] = '1';
+		else
+			buffer[7-i] = '0';
+	printf("%s ", buffer);
+}
 
 int main(void)
 {
@@ -52,7 +64,13 @@ int main(void)
 			if(NRF24L01_RxPacket(tmp_buf)==0)//一旦接收到信息,则显示出来.
 			{
 				tmp_buf[32]=0;//加入字符串结束符
-				printf("(24L01)%s", tmp_buf);			
+				printf("(24L01)");
+				for(i=1; i<5; i++)
+				{
+					printCharIn2(tmp_buf[i]);
+					//printf("%c", tmp_buf[i]);
+				}	
+				//printf("(24L01)%s", tmp_buf);	
 				newline();				
 			}
 			else
