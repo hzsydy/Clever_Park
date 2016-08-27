@@ -31,7 +31,8 @@ template*
 stm32*
 startup_stm*
 misc.*
-system_stm32*   
+system_stm32*  
+core/
 
 #unity 
 #Master_unity/

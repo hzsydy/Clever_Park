@@ -1,0 +1,45 @@
+PCAD Importer Log
+Project : TLP521-1.LibPkg
+
+Section : C:\Users\du\Downloads\TLP521-1.lia
+    Section : PCB Library - TLP521-1.PcbLib
+        Section : Load Messages
+            Warning - 1 : Skipping Token TP521-1 On Line 93
+            Warning - 1 : Skipping Token attachedSymbol On Line 179
+            Warning - 1 : Skipping Token 4 On Line 182
+            Warning - 1 : Skipping Token 2 On Line 184
+            Warning - 1 : Skipping Token 3 On Line 186
+            Warning - 1 : Skipping Token 1 On Line 188
+        EndSection
+
+        Section : Import Messages
+            Warning - 0 : PCAD Pattern Graphics [TLP521-1][Primary] associated with PCAD Component [TLP521-1] has been renamed to PCB FootPrint [TLP521-1_TLP521-1(Primary)].
+            Warning : Rectangle solder shape converted to solid region
+            Warning : Rectangle solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+        EndSection
+    EndSection
+
+    Section : SCH Library - TLP521-1.SchLib
+        Section : Parsing Messages
+            Warning - 1 : Skipping Token padStyleDef On Line 9
+            Warning - 1 : Skipping Token padStyleDef On Line 21
+            Warning - 1 : Skipping Token multiLayer On Line 72
+            Warning - 1 : Skipping Token layerContents On Line 78
+            Warning - 1 : Skipping Token layerContents On Line 87
+            Warning - 1 : Skipping Token 4 On Line 182
+            Warning - 1 : Skipping Token 2 On Line 184
+            Warning - 1 : Skipping Token 3 On Line 186
+            Warning - 1 : Skipping Token 1 On Line 188
+        EndSection
+
+        Section : Generating SCH Library - TLP521-1.SchLib
+            Warning - 0 : PCAD Pattern Graphics [TLP521-1][Primary] associated with PCAD Component [TLP521-1] has been renamed to PCB FootPrint [TLP521-1_TLP521-1(Primary)].
+        EndSection
+    EndSection
+EndSection
