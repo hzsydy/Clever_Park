@@ -21,6 +21,7 @@ tb_*.vhd
 History/
 __Previews/
 Project Logs */
+Project Outputs */
 
 #stm
 obj/
