@@ -4,19 +4,20 @@ library IEEE;
 
 entity PID is
     generic (
-        Kp : integer := 10;        --proportional constant
+        Kp : integer := 6;        --proportional constant
         Ki : integer := 0;        --integral constant
         Kd : integer := 0;        --differential constant
-        K_base : integer := 1024;        --dividend of K*
-        buffer_len : integer := 12;        --buffer of inter vars
-        LEN : integer := 8
+        K_base : integer := 64;        --dividend of K*
+        buffer_len : integer := 16;        --buffer of inter vars
+        INPUT_LEN : integer := 8;
+        OUTPUT_LEN : integer := 8
     );
     port (
         clk: in  std_logic;
         rst: in  std_logic;
-        input : in std_logic_vector(LEN-1 downto 0);
-        goal : in std_logic_vector(LEN-1 downto 0);
-        output : out std_logic_vector(LEN-1 downto 0)
+        input : in std_logic_vector(INPUT_LEN-1 downto 0);
+        goal : in std_logic_vector(INPUT_LEN-1 downto 0);
+        output : out std_logic_vector(OUTPUT_LEN-1 downto 0)
     );
 end entity;
 
@@ -31,7 +32,7 @@ architecture rtl of PID is
     );
     
     subtype buffer_len_int is integer range -(2**buffer_len-1) to (2**buffer_len-1);
-    constant max_output : buffer_len_int := 2**LEN - 1;
+    constant max_output : buffer_len_int := 2**OUTPUT_LEN - 1;
     constant min_output : buffer_len_int := 1;
     
     signal state,next_state : state_type := Reset;
@@ -39,7 +40,7 @@ architecture rtl of PID is
     signal lock_input : buffer_len_int := 0 ;    --stores the integer converted value of the input
     signal lock_goal : buffer_len_int := 0 ;    --stores the integer converted value of the input
     signal error: buffer_len_int := 0;        --Stores the deviation of the input from the set point
-    signal DataCarrier : std_logic_vector (LEN-1 downto 0); --contains the binary converted value to be output to the DAC
+    signal DataCarrier : std_logic_vector (OUTPUT_LEN-1 downto 0); --contains the binary converted value to be output to the DAC
     
     signal output_old : buffer_len_int := 0;
     signal error_old : buffer_len_int:= 0;
@@ -87,7 +88,7 @@ begin
                 end if;
  
             when ConvDac =>                --Send the output to port
-                DataCarrier <= std_logic_vector(to_unsigned(output_temp ,LEN));
+                DataCarrier <= std_logic_vector(to_unsigned(output_temp ,OUTPUT_LEN));
                 next_state <= Write2DAC;
 
             when Write2DAC =>                --send output to the DAC

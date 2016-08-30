@@ -44,6 +44,12 @@ obj/
 Debug/
 Release/
 
+#NETMF
+Stubs/
+Resources/
+Properties/
+OnBoardFlash*.*
+
 #du的私货
 fuck
 fuck*
