@@ -2,15 +2,24 @@ package require ::quartus::project
 
 set_location_assignment PIN_133 -to UART0_TX
 set_location_assignment PIN_134 -to UART0_RX
+set_location_assignment PIN_135 -to Echo_f
+set_location_assignment PIN_137 -to Trig_f
+set_location_assignment PIN_138 -to ENCL
+set_location_assignment PIN_139 -to ENCR
+set_location_assignment PIN_141 -to INFL1
+set_location_assignment PIN_142 -to INFR1
+set_location_assignment PIN_143 -to INFL2
+set_location_assignment PIN_144 -to INFR2
+
 
 set_location_assignment PIN_137 -to thermal
 
-set_location_assignment PIN_203 -to Ena
-set_location_assignment PIN_200 -to Motor_in1
-set_location_assignment PIN_198 -to Motor_in2
-set_location_assignment PIN_195 -to Motor_in3
-set_location_assignment PIN_192 -to Motor_in4
-set_location_assignment PIN_189 -to Enb
+set_location_assignment PIN_205 -to Ena
+set_location_assignment PIN_201 -to Motor_in1
+set_location_assignment PIN_199 -to Motor_in2
+set_location_assignment PIN_197 -to Motor_in3
+set_location_assignment PIN_193 -to Motor_in4
+set_location_assignment PIN_191 -to Enb
 set_location_assignment PIN_131 -to Clk
 set_location_assignment PIN_116 -to IDKEY[3]
 set_location_assignment PIN_115 -to IDKEY[2]
