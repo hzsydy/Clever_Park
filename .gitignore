@@ -11,10 +11,17 @@ simulation/
 *.rpt
 incremental_db/
 
+#simulation
+work/
+vsim.wlf
+*.do
+tb_*.vhd
+
 #sb altium designer
 History/
 __Previews/
 Project Logs */
+Project Outputs */
 
 #stm
 obj/
@@ -25,7 +32,23 @@ template*
 stm32*
 startup_stm*
 misc.*
-system_stm32*   
+system_stm32*  
+core/
+
+#unity 
+#Master_unity/
+
+#C#
+bin/
+obj/
+Debug/
+Release/
+
+#NETMF
+Stubs/
+Resources/
+Properties/
+OnBoardFlash*.*
 
 #du的私货
 fuck

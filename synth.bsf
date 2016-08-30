@@ -20,8 +20,8 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 176 128)
-	(text "HCSR04" (rect 5 0 43 12)(font "Arial" ))
+	(rect 16 16 192 128)
+	(text "synth" (rect 5 0 27 12)(font "Arial" ))
 	(text "inst" (rect 8 96 20 108)(font "Arial" ))
 	(port
 		(pt 0 32)
@@ -40,39 +40,31 @@ applicable agreement for further details.
 	(port
 		(pt 0 64)
 		(input)
-		(text "echo" (rect 0 0 18 12)(font "Arial" ))
-		(text "echo" (rect 21 59 39 71)(font "Arial" ))
+		(text "trig0_stop" (rect 0 0 38 12)(font "Arial" ))
+		(text "trig0_stop" (rect 21 59 59 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 1))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "trig_en" (rect 0 0 27 12)(font "Arial" ))
-		(text "trig_en" (rect 21 75 48 87)(font "Arial" ))
+		(text "trig1_alart" (rect 0 0 37 12)(font "Arial" ))
+		(text "trig1_alart" (rect 21 75 58 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80)(line_width 1))
 	)
 	(port
-		(pt 160 32)
+		(pt 176 32)
 		(output)
-		(text "trig" (rect 0 0 11 12)(font "Arial" ))
-		(text "trig" (rect 128 27 139 39)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32)(line_width 1))
+		(text "pwm_out" (rect 0 0 36 12)(font "Arial" ))
+		(text "pwm_out" (rect 119 27 155 39)(font "Arial" ))
+		(line (pt 176 32)(pt 160 32)(line_width 1))
 	)
-	(port
-		(pt 160 48)
-		(output)
-		(text "dist[7..0]" (rect 0 0 33 12)(font "Arial" ))
-		(text "dist[7..0]" (rect 106 43 139 55)(font "Arial" ))
-		(line (pt 160 48)(pt 144 48)(line_width 3))
-	)
-	(port
-		(pt 160 64)
-		(output)
-		(text "ready" (rect 0 0 23 12)(font "Arial" ))
-		(text "ready" (rect 116 59 139 71)(font "Arial" ))
-		(line (pt 160 64)(pt 144 64)(line_width 1))
-	)
+	(parameter
+		"CLK_FREQ"
+		"50000000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 144 96)(line_width 1))
+		(rectangle (rect 16 16 160 96)(line_width 1))
 	)
+	(annotation_block (parameter)(rect 192 -64 292 16))
 )

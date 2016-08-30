@@ -1,0 +1,56 @@
+PCAD Importer Log
+Project : L298N.LibPkg
+
+Section : C:\Users\du\Downloads\L298N.lia
+    Section : PCB Library - L298N.PcbLib
+        Section : Load Messages
+            Warning - 1 : Skipping Token L298N On Line 144
+            Warning - 1 : Skipping Token attachedSymbol On Line 314
+        EndSection
+
+        Section : Import Messages
+            Warning : Rectangle solder shape converted to solid region
+            Warning : Rectangle solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+            Warning : Oval solder shape converted to solid region
+        EndSection
+    EndSection
+
+    Section : SCH Library - L298N.SchLib
+        Section : Parsing Messages
+            Warning - 1 : Skipping Token padStyleDef On Line 9
+            Warning - 1 : Skipping Token padStyleDef On Line 21
+            Warning - 1 : Skipping Token multiLayer On Line 72
+            Warning - 1 : Skipping Token layerContents On Line 89
+        EndSection
+
+        Section : Generating SCH Library - L298N.SchLib
+        EndSection
+    EndSection
+EndSection
