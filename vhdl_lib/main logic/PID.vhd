@@ -8,7 +8,7 @@ entity PID is
         Ki : integer := 0;        --integral constant
         Kd : integer := 0;        --differential constant
         K_base : integer := 64;        --dividend of K*
-        buffer_len : integer := 16;        --buffer of inter vars
+        BUFFER_LEN : integer := 16;        --buffer of inter vars
         INPUT_LEN : integer := 8;
         OUTPUT_LEN : integer := 8
     );
@@ -31,7 +31,7 @@ architecture rtl of PID is
         Write2DAC
     );
     
-    subtype buffer_len_int is integer range -(2**buffer_len-1) to (2**buffer_len-1);
+    subtype buffer_len_int is integer range -(2**BUFFER_LEN-1) to (2**BUFFER_LEN-1);
     constant max_output : buffer_len_int := 2**OUTPUT_LEN - 1;
     constant min_output : buffer_len_int := 1;
     

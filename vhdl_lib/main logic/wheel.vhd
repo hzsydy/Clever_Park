@@ -4,6 +4,11 @@ library IEEE;
 
 entity wheel is
     generic (
+        Kp: integer := 6;
+        Ki: integer := 0;
+        Kd: integer := 0;
+        K_base: integer := 64;
+        BUFFER_LEN: integer := 16;
         INPUT_LEN : integer := 8;
         OUTPUT_LEN : integer := 8;
         START_VEL : std_logic_vector := "01100000"
@@ -21,11 +26,6 @@ entity wheel is
 end entity;
 
 architecture rtl of wheel is
-    constant Kp: integer := 6;
-    constant Ki: integer := 0;
-    constant Kd: integer := 0;
-    constant K_base: integer := 64;
-    constant buffer_len: integer := 16;
     
     constant input_zero : std_logic_vector(INPUT_LEN - 1 downto 0)
         := std_logic_vector(to_unsigned(0, INPUT_LEN));
@@ -43,7 +43,7 @@ begin
             Ki         => Ki,
             Kd         => Kd,
             K_base     => K_base,
-            buffer_len => buffer_len,
+            BUFFER_LEN => BUFFER_LEN,
             INPUT_LEN  => INPUT_LEN,
             OUTPUT_LEN => OUTPUT_LEN
         )
