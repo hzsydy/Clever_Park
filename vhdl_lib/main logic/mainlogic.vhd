@@ -14,21 +14,16 @@ entity mainlogic is
         dfbo                :   in std_logic_vector(7 downto 0);    --distance from back obstacles, cm
         speedl              :   in std_logic_vector(7 downto 0);    --speed of left wheel, r/min
         speedr              :   in std_logic_vector(7 downto 0);    --speed of right wheel, r/min
-        numofgarage         :   in std_logic_vector(3 downto 0);    --num of garage
         wirelessout3        :   out std_logic_vector(7 downto 0);   --send message to upper computer
         wirelessout2        :   out std_logic_vector(7 downto 0);   --send message to upper computer
         wirelessout1        :   out std_logic_vector(7 downto 0);   --send message to upper computer
         wirelessout0        :   out std_logic_vector(7 downto 0);   --send message to upper computer
         wirelessin          :   in std_logic_vector(7 downto 0);    --get message from upper computer
-        dutycycle_left      :   out std_logic_vector(3 downto 0);
-        dutycycle_right     :   out std_logic_vector(3 downto 0);
+        dutycycle_left      :   out std_logic_vector(7 downto 0);
+        dutycycle_right     :   out std_logic_vector(7 downto 0);
         
 
         --logic port
-        HCSR04_front_ready  :   in std_logic;
-        HCSR04_back_ready   :   in std_logic;
-        roc_enc_left_ready  :   in std_logic;
-        roc_enc_right_ready :   in std_logic;
         infrared_left1      :   in std_logic;
         infrared_left2      :   in std_logic;
         infrared_right1     :   in std_logic;
@@ -46,6 +41,10 @@ end entity;
 architecture rtl of mainlogic is    --clk = 500kHz
     constant INFRARED_BLACK   :    std_logic := '1';
     constant INFRARED_WHITE   :    std_logic := '0';
+    constant ZERO : std_logic_vector(7 downto 0):="00000000";
+    constant SPEED_HIGH : std_logic_vector(7 downto 0):="00011000";
+    constant SPEED_LOW : std_logic_vector(7 downto 0):="00001100";
+
     
     type state_type is (waiting, yuri, gotogarage, parking, occupancygarage);
     
@@ -55,16 +54,17 @@ architecture rtl of mainlogic is    --clk = 500kHz
     signal direction : std_logic := '0';
         
 begin
+    
     main:process(clk,rst)
         variable timerformotor :integer range 0 to 8388607 := 0;
         variable timer:integer range 0 to 262143 := 0;
     begin
         if(rst='1') then
             state <= waiting;
-            wirelessout3 <= "00000000";
-            wirelessout2 <= "00000000";
-            wirelessout1 <= "00000000";
-            wirelessout0 <= "00000000";
+            wirelessout3 <= ZERO;
+            wirelessout2 <= ZERO;
+            wirelessout1 <= ZERO;
+            wirelessout0 <= ZERO;
             timerformotor := 0;
             timer := 0;
             rxup <= '0';
@@ -92,15 +92,15 @@ begin
                             state <= yuri;
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= "0000";
-                            dutycycle_right <= "0000";
+                            dutycycle_left <= ZERO;
+                            dutycycle_right <= ZERO;
                         elsif (wirelessin = "00110001") then
                             state <= gotogarage;
                             state_car <= "11";
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= "0110";
-                            dutycycle_right <= "0110";
+                            dutycycle_left <= SPEED_HIGH;
+                            dutycycle_right <= SPEED_HIGH;
                         end if;
                     elsif(rxupper = '0' and rxup = '1') then
                         rxup <= '0';
@@ -115,21 +115,21 @@ begin
                             state <= yuri;
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= "0000";
-                            dutycycle_right <= "0000";
+                            dutycycle_left <= ZERO;
+                            dutycycle_right <= ZERO;
                         end if;
                     elsif(rxupper = '0' and rxup = '1') then
                         rxup <= '0';
                     end if;
                     if (infrared_right2 = INFRARED_BLACK) then
-                        dutycycle_left <= "0011";
-                        dutycycle_right <= "0110";
+                        dutycycle_left <= SPEED_LOW;
+                        dutycycle_right <= SPEED_HIGH;
                     elsif(infrared_left2 = INFRARED_BLACK) then
-                        dutycycle_left <= "0110";
-                        dutycycle_right <= "0011";
+                        dutycycle_left <= SPEED_HIGH;
+                        dutycycle_right <= SPEED_LOW;
                     else
-                        dutycycle_left <= "0110";
-                        dutycycle_right <= "0110";
+                        dutycycle_left <= SPEED_HIGH;
+                        dutycycle_right <= SPEED_HIGH;
                     end if;
                     
                 when parking =>fuck <= "01";
@@ -141,39 +141,39 @@ begin
                             timerformotor := 0;
                             directionleft <= '1';
                             directionright <= '0';
-                            dutycycle_left <= "0111";
-                            dutycycle_right <= "0111";
+                            dutycycle_left <= SPEED_HIGH;
+                            dutycycle_right <= SPEED_HIGH;
                         elsif (wirelessin = "01010111") then --'W'
                             timerformotor := 0;
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= "0111";
-                            dutycycle_right <= "0111";
+                            dutycycle_left <= SPEED_HIGH;
+                            dutycycle_right <= SPEED_HIGH;
                         elsif (wirelessin = "01000001") then --'A'
                             timerformotor := 0;
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= "0100";
-                            dutycycle_right <= "0111";
+                            dutycycle_left <= SPEED_LOW;
+                            dutycycle_right <= SPEED_HIGH;
                         elsif (wirelessin = "01000100") then --'D'
                             timerformotor := 0;
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= "0111";
-                            dutycycle_right <= "0100";
+                            dutycycle_left <= SPEED_HIGH;
+                            dutycycle_right <= SPEED_LOW;
                         elsif (wirelessin = "01010001") then --'Q'
                             timerformotor := 0;
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= "0000";
-                            dutycycle_right <= "0000";
+                            dutycycle_left <= ZERO;
+                            dutycycle_right <= ZERO;
                         elsif (wirelessin = "00110001") then --'1'
                             state <= gotogarage;
                             state_car <= "11";
                             directionleft <= '1';
                             directionright <= '0';
-                            dutycycle_left <= "0000";
-                            dutycycle_right <= "0000";
+                            dutycycle_left <= ZERO;
+                            dutycycle_right <= ZERO;
                         end if;
                     elsif(rxupper = '0' and rxup = '1') then
                         rxup <= '0';
@@ -183,8 +183,8 @@ begin
                         timerformotor := 0;
                         directionleft <= '1';
                         directionright <= '0';
-                        dutycycle_left <= "0000";
-                        dutycycle_right <= "0000";
+                        dutycycle_left <= ZERO;
+                        dutycycle_right <= ZERO;
                     end if;
                     fuck <= "10";
             end case;
