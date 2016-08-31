@@ -55,33 +55,39 @@ architecture rtl of mainlogic is    --clk = 500kHz
         
 begin
     
+    wirelessout0 <= (infrared_left1,infrared_left2,infrared_right2,infrared_right1,'0','0','0','0');
+    wirelessout1 <= speedr;
+    wirelessout2 <= speedl;
+    wirelessout3 <= dffo;
+
+    
     main:process(clk,rst)
         variable timerformotor :integer range 0 to 8388607 := 0;
-        variable timer:integer range 0 to 262143 := 0;
+        --variable timer:integer range 0 to 262143 := 0;
     begin
         if(rst='1') then
             state <= waiting;
-            wirelessout3 <= ZERO;
-            wirelessout2 <= ZERO;
-            wirelessout1 <= ZERO;
-            wirelessout0 <= ZERO;
+            --wirelessout3 <= ZERO;
+            --wirelessout2 <= ZERO;
+            --wirelessout1 <= ZERO;
+            --wirelessout0 <= ZERO;
             timerformotor := 0;
-            timer := 0;
+            --timer := 0;
             rxup <= '0';
         elsif(clk = '1' and clk'event) then
-            timer := timer + 1;
-            if (timer = 262143) then
-                timer := 0;
-                wirelessout0 <= (infrared_left1,infrared_left2,infrared_right2,infrared_right1,'0','0','0','0');
-                wirelessout1 <=speedr;
-					wirelessout2 <=speedl;
-                wirelessout3 <= dffo;
-            end if;
-            if (timer < 1000) then
-                outputupperready <= '1';
-            else
-                outputupperready <= '0';
-            end if;
+            --timer := timer + 1;
+            --if (timer = 262143) then
+            --    timer := 0;
+            --    wirelessout0 <= (infrared_left1,infrared_left2,infrared_right2,infrared_right1,'0','0','0','0');
+            --    wirelessout1 <=speedr;
+			--	  wirelessout2 <=speedl;
+            --    wirelessout3 <= dffo;
+            --end if;
+            --if (timer < 1000) then
+            --    outputupperready <= '1';
+            --else
+            --    outputupperready <= '0';
+            --end if;
             
             case state is 
                 when waiting =>
