@@ -32,7 +32,7 @@ namespace SerialPort_HomeworkWeGoFor
         byte[] go_back = new byte[] { 0x53, 0x0d, 0x0a };
         byte[] go_left = new byte[] { 0x41, 0x0d, 0x0a };
         byte[] go_right = new byte[] { 0x44, 0x0d, 0x0a };
-        byte[] autorun = new byte[] { 0x30, 0x0d, 0x0a };
+        byte[] autorun = new byte[] { 0x31, 0x0d, 0x0a };
         byte[] stop = new byte[] { 0x30, 0x0d, 0x0a };
 
 
@@ -310,6 +310,19 @@ namespace SerialPort_HomeworkWeGoFor
                         try
                         {
                             _sp.Write(manual, 0, manual.Length);
+                        }
+                        catch { }
+                    }
+                    e.Handled = true;
+                    textBox3.Text = "";
+                    break;
+                case Keys.D1:
+                case Keys.NumPad1:
+                    if (_sp.IsOpen)
+                    {
+                        try
+                        {
+                            _sp.Write(autorun, 0, autorun.Length);
                         }
                         catch { }
                     }
