@@ -34,7 +34,10 @@ entity mainlogic is
         outputupperready    :   out std_logic;
 
 
-        fuck                :   out std_logic_vector(1 downto 0)
+        fuck                :   out std_logic_vector(1 downto 0);
+		  
+		  trig_end				 :	  out std_logic;
+		  trig_start			 :   out std_logic
     );
 end entity;
 
@@ -43,12 +46,12 @@ architecture rtl of mainlogic is    --clk = 500kHz
     constant INFRARED_WHITE   :    std_logic := '0';
     constant ZERO : std_logic_vector(7 downto 0):="00000000";
 
-    constant SPEED_VERYHIGH : std_logic_vector(7 downto 0):="00011100";
-    constant SPEED_HIGH : std_logic_vector(7 downto 0):="00010000";
-    constant SPEED_LOW : std_logic_vector(7 downto 0):="00001100";
+    constant SPEED_VERYHIGH : std_logic_vector(7 downto 0):="01111111";
+    constant SPEED_HIGH : std_logic_vector(7 downto 0):="01100000";
+    constant SPEED_LOW : std_logic_vector(7 downto 0):="00100001";
 
 
-    type state_type is (waiting, yuri, gotogarage, parking, occupancygarage);
+    type state_type is (waiting, yuri, gotogarage, parking);
 
     signal state : state_type := waiting;
     signal rxup : std_logic := '0';
@@ -65,11 +68,15 @@ begin
 
     main:process(clk,rst)
         variable timerformotor :integer range 0 to 8388607 := 0;
+        variable obstacle : integer range 0 to  524287:= 0;
+        variable ultrasonic : integer range 0 to 524287 := 0;
         --variable timer:integer range 0 to 262143 := 0;
     begin
         if(rst='1') then
             state <= waiting;
             timerformotor := 0;
+				trig_end <= '0';
+				trig_start <= '0';
             rxup <= '0';
         elsif(clk = '1' and clk'event) then
 
@@ -89,8 +96,17 @@ begin
                             state_car <= "11";
                             directionleft <= '0';
                             directionright <= '1';
-                            dutycycle_left <= SPEED_HIGH;
-                            dutycycle_right <= SPEED_HIGH;
+                            dutycycle_left <= ZERO;
+                            dutycycle_right <= ZERO;
+                            obstacle := 0;
+                        elsif (wirelessin = "00110010") then
+                            state <= parking;
+                            state_car <= "11";
+                            ultrasonic := 0;
+                            directionleft <= '0';
+                            directionright <= '1';
+                            dutycycle_left <= ZERO;
+                            dutycycle_right <= ZERO;
                         end if;
                     elsif(rxupper = '0' and rxup = '1') then
                         rxup <= '0';
@@ -111,6 +127,20 @@ begin
                     elsif(rxupper = '0' and rxup = '1') then
                         rxup <= '0';
                     end if;
+                    if (conv_integer(dffo) > 3 and conv_integer (dffo) < 10) then
+                        obstacle := obstacle + 1;
+                    end if;
+                    if (obstacle = 50000) then
+                        state <= parking ;
+                        state_car <= "11";
+                        directionleft <= '0';
+                        directionright <= '1';
+                        ultrasonic := 0;
+                        dutycycle_left <= ZERO;
+                        dutycycle_right <= ZERO;
+								trig_end <='0';
+								trig_start <= '1';
+                    end if;
                     if (infrared_right2 = INFRARED_BLACK) then
                         dutycycle_left <= SPEED_LOW;
                         dutycycle_right <= SPEED_VERYHIGH;
@@ -122,14 +152,72 @@ begin
                         dutycycle_right <= SPEED_HIGH;
                     end if;
 
-                when parking =>fuck <= "01";
-                when occupancygarage =>fuck <= "01";
+                when parking =>
+                    fuck <= "00";
+                    if (rxupper = '1' and rxup = '0') then
+                        rxup <= '1';
+                        --go to manual mode
+                        if (wirelessin = "00110000") then
+                            state <= yuri;
+                            directionleft <= '0';
+                            directionright <= '1';
+                            dutycycle_left <= ZERO;
+                            dutycycle_right <= ZERO;
+                        end if;
+                    elsif(rxupper = '0' and rxup = '1') then
+                        rxup <= '0';
+                    end if;
+                    case state_car is
+                        when "01"=>
+                            directionleft <= '0';
+                            directionright <= '1';
+                            dutycycle_left <= SPEED_LOW;
+                            dutycycle_right <= SPEED_VERYHIGH;
+                            ultrasonic := ultrasonic + 1;
+                            if (ultrasonic = 500000) then
+                                state_car <= "10";
+                                ultrasonic := 0;
+                            end if;
+                        when "11" =>
+                            directionleft <= '1';
+                            directionright <= '0';
+                            dutycycle_left <= SPEED_HIGH;
+                            dutycycle_right <= SPEED_HIGH;
+                            ultrasonic := ultrasonic + 1;
+                            if (ultrasonic = 250000) then
+                                state_car <= "01";
+                                ultrasonic := 0;
+										  trig_end <= '1';
+                            end if;
+                        
+                        when "10"=>
+                            directionleft <= '0';
+                            directionright <= '1';
+                            dutycycle_left <= SPEED_VERYHIGH;
+                            dutycycle_right <= SPEED_LOW;
+                            ultrasonic := ultrasonic + 1;
+                            if (ultrasonic = 500000) then
+                                state_car <= "00";
+                                ultrasonic := 0;
+                            end if;
+                        when "00"=>
+                            directionleft <= '0';
+                            directionright <= '1';
+                            dutycycle_left <= SPEED_LOW;
+                            dutycycle_right <= SPEED_VERYHIGH;
+                            ultrasonic := ultrasonic + 1;
+                            if (ultrasonic = 250000) then
+                                state <= yuri;
+                                ultrasonic := 0;
+                            end if;
+                    
+                    end case;
                 when yuri =>
                     timerformotor := timerformotor + 1;
                     if (timerformotor = 524287) then
                         timerformotor := 0;
-                        directionleft <= '1';
-                        directionright <= '0';
+                        directionleft <= '0';
+                        directionright <= '1';
                         dutycycle_left <= ZERO;
                         dutycycle_right <= ZERO;
                     else
@@ -153,12 +241,12 @@ begin
                                 directionleft <= '0';
                                 directionright <= '1';
                                 dutycycle_left <= SPEED_LOW;
-                                dutycycle_right <= SPEED_HIGH;
+                                dutycycle_right <= SPEED_VERYHIGH;
                             elsif (wirelessin = "01000100") then --'D'
                                 timerformotor := 0;
                                 directionleft <= '0';
                                 directionright <= '1';
-                                dutycycle_left <= SPEED_HIGH;
+                                dutycycle_left <= SPEED_VERYHIGH;
                                 dutycycle_right <= SPEED_LOW;
                             elsif (wirelessin = "01010001") then --'Q'
                                 timerformotor := 0;
@@ -169,8 +257,9 @@ begin
                             elsif (wirelessin = "00110001") then --'1'
                                 state <= gotogarage;
                                 state_car <= "11";
-                                directionleft <= '1';
-                                directionright <= '0';
+                                obstacle := 0;
+                                directionleft <= '0';
+                                directionright <= '1';
                                 dutycycle_left <= ZERO;
                                 dutycycle_right <= ZERO;
                             end if;

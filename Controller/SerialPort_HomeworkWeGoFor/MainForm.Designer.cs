@@ -46,8 +46,23 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.left2 = new System.Windows.Forms.PictureBox();
+            this.right1 = new System.Windows.Forms.PictureBox();
+            this.right2 = new System.Windows.Forms.PictureBox();
+            this.left1 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dffo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.leftrot = new System.Windows.Forms.TextBox();
+            this.rightrot = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.left2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.left1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -222,11 +237,120 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "键盘操控捕捉器";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(490, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(149, 12);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "红外 左一 左二 右二 右一";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // left2
+            // 
+            this.left2.Location = new System.Drawing.Point(549, 45);
+            this.left2.Name = "left2";
+            this.left2.Size = new System.Drawing.Size(23, 20);
+            this.left2.TabIndex = 10;
+            this.left2.TabStop = false;
+            this.left2.Click += new System.EventHandler(this.left2_Click);
+            // 
+            // right1
+            // 
+            this.right1.Location = new System.Drawing.Point(607, 45);
+            this.right1.Name = "right1";
+            this.right1.Size = new System.Drawing.Size(23, 20);
+            this.right1.TabIndex = 11;
+            this.right1.TabStop = false;
+            // 
+            // right2
+            // 
+            this.right2.Location = new System.Drawing.Point(578, 45);
+            this.right2.Name = "right2";
+            this.right2.Size = new System.Drawing.Size(23, 20);
+            this.right2.TabIndex = 12;
+            this.right2.TabStop = false;
+            // 
+            // left1
+            // 
+            this.left1.Location = new System.Drawing.Point(520, 45);
+            this.left1.Name = "left1";
+            this.left1.Size = new System.Drawing.Size(23, 20);
+            this.left1.TabIndex = 13;
+            this.left1.TabStop = false;
+            this.left1.Click += new System.EventHandler(this.left1_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(490, 82);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "前方障碍物距离";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // dffo
+            // 
+            this.dffo.Location = new System.Drawing.Point(520, 97);
+            this.dffo.Name = "dffo";
+            this.dffo.Size = new System.Drawing.Size(100, 21);
+            this.dffo.TabIndex = 15;
+            this.dffo.TextChanged += new System.EventHandler(this.dffo_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(492, 140);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 12);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "左轮转速(r/s)";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // leftrot
+            // 
+            this.leftrot.Location = new System.Drawing.Point(520, 159);
+            this.leftrot.Name = "leftrot";
+            this.leftrot.Size = new System.Drawing.Size(100, 21);
+            this.leftrot.TabIndex = 18;
+            this.leftrot.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            // 
+            // rightrot
+            // 
+            this.rightrot.Location = new System.Drawing.Point(520, 219);
+            this.rightrot.Name = "rightrot";
+            this.rightrot.Size = new System.Drawing.Size(100, 21);
+            this.rightrot.TabIndex = 20;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(492, 200);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(71, 12);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "右轮转速r/s";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 380);
+            this.ClientSize = new System.Drawing.Size(662, 380);
+            this.Controls.Add(this.rightrot);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.leftrot);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.dffo);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.left1);
+            this.Controls.Add(this.right2);
+            this.Controls.Add(this.right1);
+            this.Controls.Add(this.left2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button3);
@@ -238,11 +362,16 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "MainForm";
             this.Text = "上位机 高清重置版";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.left2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.left1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,6 +396,17 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox left2;
+        private System.Windows.Forms.PictureBox right1;
+        private System.Windows.Forms.PictureBox right2;
+        private System.Windows.Forms.PictureBox left1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox dffo;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox leftrot;
+        private System.Windows.Forms.TextBox rightrot;
+        private System.Windows.Forms.Label label6;
     }
 }
 

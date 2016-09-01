@@ -4,6 +4,7 @@ using System.Text;
 using System.IO.Ports;
 using System.Threading;
 using System.Collections.Generic;
+using SerialPort_HomeworkWeGoFor.Properties;
 
 namespace SerialPort_HomeworkWeGoFor
 {
@@ -33,6 +34,8 @@ namespace SerialPort_HomeworkWeGoFor
         byte[] go_left = new byte[] { 0x41, 0x0d, 0x0a };
         byte[] go_right = new byte[] { 0x44, 0x0d, 0x0a };
         byte[] autorun = new byte[] { 0x31, 0x0d, 0x0a };
+        byte[] queue = new byte[100];
+        int lq = 0;
         byte[] stop = new byte[] { 0x30, 0x0d, 0x0a };
 
 
@@ -182,12 +185,56 @@ namespace SerialPort_HomeworkWeGoFor
         {
             if (isBufferReceived)
             {
+
+                timer1.Enabled = false;
                 byte[] buf = new byte[_buf.Count];
                 int i = 0;
                 foreach (byte b in _buf)
                 {
                     buf[i] = b;
                     i++;
+                    if (lq != 0 || (b == '0'||b == '1'))
+                        queue[lq++] = b;
+                    if (lq >= 2 && queue[lq - 2] == '\r' && queue[lq - 1] == '\n')
+                    {
+                        if (lq >= 14 && (queue[0] == '0' || queue[0] == '1'))
+                        {
+                            if (queue[0] == '1')
+                                left1.Image = Resources.black;
+                            else
+                                left1.Image = Resources.white;
+                            if (queue[1] == '1')
+                                left2.Image = Resources.black;
+                            else
+                                left2.Image = Resources.white;
+                            if (queue[2] == '1')
+                                right2.Image = Resources.black;
+                            else
+                                right2.Image = Resources.white;
+                            if (queue[3] == '1')
+                                right1.Image = Resources.black;
+                            else
+                                right1.Image = Resources.white;
+                            int a = 0;
+                            int c = 10;
+                            while (queue[c] >= '0' && queue[c] <= '9')
+                                a = a * 10 + queue[c++] - '0';
+                            a /= 10;
+                            rightrot.Text = a.ToString();
+                            a = 0;
+                            ++c;
+                            while (queue[c] >= '0' && queue[c] <= '9')
+                                a = a * 10 + queue[c++] - '0';
+                            a /= 10;
+                            leftrot.Text = a.ToString();
+                            a = 0;
+                            ++c;
+                            while (queue[c] >= '0' && queue[c] <= '9')
+                                a = a * 10 + queue[c++] - '0';
+                            dffo.Text = a.ToString();
+                        }
+                        lq = 0;
+                    }
                 }
                 _buf.Clear();
                 if (ishex)
@@ -200,6 +247,7 @@ namespace SerialPort_HomeworkWeGoFor
                 else
                 {
                     textBox1.Text += _curCode.GetString(buf);
+                    
                 }
                 
 
@@ -207,6 +255,7 @@ namespace SerialPort_HomeworkWeGoFor
                 timer1.Enabled = true;
             }
         }
+
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -331,6 +380,51 @@ namespace SerialPort_HomeworkWeGoFor
                     break;
             }
             //
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void left1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void left2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dffo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
 
 
