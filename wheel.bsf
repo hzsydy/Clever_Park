@@ -59,6 +59,31 @@ applicable agreement for further details.
 		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
 	(parameter
+		"Kp"
+		"6"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Ki"
+		"0"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Kd"
+		"0"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"K_base"
+		"64"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BUFFER_LEN"
+		"16"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
 		"INPUT_LEN"
 		"8"
 		""

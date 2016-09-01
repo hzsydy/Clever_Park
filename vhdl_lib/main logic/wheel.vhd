@@ -60,14 +60,14 @@ begin
         if rst = '1' then
             output <= output_zero;
         elsif clk = '1' and clk'event then
-            if input = input_zero then 
-                if goal = input_zero then
-                    output <= output_zero;
-                else
-                    output <= START_VEL;
-                end if;
+            if goal = input_zero then
+                output <= output_zero;
             else
-                output <= pid_output;
+                if input = input_zero then
+                    output <= START_VEL;
+                else
+                    output <= pid_output;
+                end if;
             end if;
         end if;
     end process main;

@@ -12,8 +12,8 @@ entity motor is
         --All work and no play make Jack a dull boy.
         direction_left      :   in std_logic;
         direction_right     :   in std_logic;
-        dutycycle_left      :   in std_logic_vector(3 downto 0);
-        dutycycle_right     :   in std_logic_vector(3 downto 0);
+        dutycycle_left      :   in std_logic_vector(7 downto 0);
+        dutycycle_right     :   in std_logic_vector(7 downto 0);
         Ena                 :   out std_logic;
         out1                :   out std_logic;
         out2                :   out std_logic;
@@ -28,11 +28,11 @@ signal clk2 :std_logic := '0';
 
 begin
     frequecncy_divider:process(clk) --clk is in basic frequency 50MHz
-        variable calc :integer range 0 to 8191 := 0;
+        variable calc :integer range 0 to 511 := 0;
     begin
         if(clk = '1' and clk'event) then
             calc := calc + 1;
-            if (calc = 5000) then
+            if (calc = 500) then
                 calc := 0;
                 clk2 <= not clk2;
             end if;
@@ -40,10 +40,10 @@ begin
     end process;
     
     main:process(clk2,rst)
-        variable calcleft       :   integer range 0 to 15 := 0;
-        variable calcright      :   integer range 0 to 15 := 0;
-        variable percentleft    :   integer range 0 to 15 := 0;
-        variable percentright   :   integer range 0 to 15 := 0;
+        variable calcleft       :   integer range 0 to 255 := 0;
+        variable calcright      :   integer range 0 to 255 := 0;
+        variable percentleft    :   integer range 0 to 255 := 0;
+        variable percentright   :   integer range 0 to 255 := 0;
     begin
         if (rst = '1') then
             Ena <= '0';

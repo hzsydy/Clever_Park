@@ -54,15 +54,15 @@ applicable agreement for further details.
 	(port
 		(pt 0 96)
 		(input)
-		(text "dutycycle_left[3..0]" (rect 0 0 76 12)(font "Arial" ))
-		(text "dutycycle_left[3..0]" (rect 21 91 97 103)(font "Arial" ))
+		(text "dutycycle_left[7..0]" (rect 0 0 76 12)(font "Arial" ))
+		(text "dutycycle_left[7..0]" (rect 21 91 97 103)(font "Arial" ))
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
 		(pt 0 112)
 		(input)
-		(text "dutycycle_right[3..0]" (rect 0 0 81 12)(font "Arial" ))
-		(text "dutycycle_right[3..0]" (rect 21 107 102 119)(font "Arial" ))
+		(text "dutycycle_right[7..0]" (rect 0 0 81 12)(font "Arial" ))
+		(text "dutycycle_right[7..0]" (rect 21 107 102 119)(font "Arial" ))
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port

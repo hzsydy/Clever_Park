@@ -64,12 +64,16 @@ int main(void)
 			if(NRF24L01_RxPacket(tmp_buf)==0)//一旦接收到信息,则显示出来.
 			{
 				tmp_buf[32]=0;//加入字符串结束符
-				printf("(24L01)");
-				for(i=1; i<5; i++)
-				{
-					printCharIn2(tmp_buf[i]);
-					//printf("%c", tmp_buf[i]);
-				}	
+				//printf("(24L01)");
+				printCharIn2(tmp_buf[1]);
+				printf("\t%d", (int)tmp_buf[2]);
+				printf("\t%d", (int)tmp_buf[3]);
+				printf("\t%d", (int)tmp_buf[4]);
+				//for(i=1; i<5; i++)
+				//{
+				//	printCharIn2(tmp_buf[i]);
+				//	//printf("%c", tmp_buf[i]);
+				//}	
 				//printf("(24L01)%s", tmp_buf);	
 				newline();				
 			}
@@ -78,12 +82,12 @@ int main(void)
 				delay_us(1000);
 				if(USART_RX_STA & 0x80)
 				{
-					printf("(PC)");
-					for(i=0; i<(USART_RX_STA & 0x3F); i++)
-					{
-						printf("%c", USART_RX_BUF[i]);
-					}
-					newline();
+					//printf("(PC)");
+					//for(i=0; i<(USART_RX_STA & 0x3F); i++)
+					//{
+					//	printf("%c", USART_RX_BUF[i]);
+					//}
+					//newline();
 					for(i=0; i<(USART_RX_STA & 0x3F); i++)
 					{
 						tmp_buf[i] = USART_RX_BUF[i];
@@ -120,7 +124,7 @@ int main(void)
 				waitingforNRF24L01++;			
 				if(waitingforNRF24L01 > 5)
 				{
-					printf("give up.");newline();
+					//printf("give up.");newline();
 					mode = 1;
 					mode_inited = 0;
 				}
