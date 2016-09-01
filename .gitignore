@@ -35,6 +35,11 @@ misc.*
 system_stm32*  
 core/
 
+#STM32F7
+EWARM/
+
+    
+    
 #unity 
 #Master_unity/
 
